@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "PayWalls ByPass FR",
+  "version": "1.1",
+  "description": "Le Parisien, midi libre, medium",
+  "permissions": [
+    "declarativeNetRequest",
+	"serviceWorker"
+  ],
+  "background": {
+    "service_worker": "sw_interceptor.js"
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "rules",
+        "path": "rules.json",
+        "enabled": true
+      }
+    ]
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.midilibre.fr/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
