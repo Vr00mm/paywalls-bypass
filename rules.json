@@ -36,7 +36,6 @@
       "type": "modifyHeaders",
       "requestHeaders": [
         { "header": "cookie", "operation": "remove" },
-        { "header": "referer", "operation": "remove" },
         { "header": "sec-ch-ua", "operation": "remove" },
         { "header": "sec-ch-ua-mobile", "operation": "remove" },
         { "header": "sec-ch-ua-platform", "operation": "remove" },
@@ -44,11 +43,22 @@
         { "header": "sec-fetch-mode", "operation": "remove" },
         { "header": "sec-fetch-site", "operation": "remove" },
         { "header": "sec-fetch-user", "operation": "remove" },
-        { "header": "user-agent", "operation": "set", "value": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" }
+        { "header": "referer", "operation": "set", "value": "https://facebook.com/" },
+        { "header": "user-agent", "operation": "set", "value": "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)" }
       ]
     },
     "condition" : {
-      "urlFilter": "https://www.lesechos.fr*"
+      "urlFilter": "www.lesechos.fr*",
+      "resourceTypes" : ["script", "main_frame", "sub_frame"]
     }
-  }  
+  },
+  {
+    "id" : 4,
+    "priority": 1,
+    "action" : { "type" : "block" },
+    "condition" : {
+      "urlFilter" : "assets/sw.js",
+      "domains" : ["www.lesechos.fr"]
+    }
+  }
 ]

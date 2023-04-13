@@ -5,11 +5,10 @@
   "description": "Le Parisien, midi libre, medium",
   "permissions": [
     "declarativeNetRequest",
-	"serviceWorker"
+    "webRequest",
+    "storage",
+    "scripting"
   ],
-  "background": {
-    "service_worker": "sw_interceptor.js"
-  },
   "host_permissions": [
     "<all_urls>"
   ],
@@ -27,10 +26,19 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://www.midilibre.fr/*"
-      ],
+      "matches": ["https://www.midilibre.fr/*", "https://www.lesechos.fr/*"],
       "js": ["content.js"]
+    },
+    {
+      "matches": ["https://www.lesechos.fr/*"],
+      "js": ["content_lesechos.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["page_lesechos.js"],
+      "matches": ["https://www.lesechos.fr/*"]
     }
   ]
 }
